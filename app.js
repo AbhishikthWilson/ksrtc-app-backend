@@ -3,9 +3,10 @@ const mongoose=require("mongoose")
 const cors=require("cors")
 const bcryptjs = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-
+const buses = require("./models/bus")
 
 const users = require("./models/users")
+const {busModel} = require("./models/bus")
 
 const {userModel} = require("./models/users")
 
@@ -60,6 +61,14 @@ app.post("/signin",(req,res)=>{
           res.json(error)
       }
     )  
+})
+
+
+app.post("/addBus",(req,res)=>{
+    let input = req.body
+    let bus = new busModel(input)
+    bus.save()
+    res.json({"status":"success"})
 })
 
 
